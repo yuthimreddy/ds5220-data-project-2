@@ -1,0 +1,5 @@
+boto3==1.34.0
+requests==2.31.0
+pandas==2.2.0
+matplotlib==3.8.2
+seaborn==0.13.2

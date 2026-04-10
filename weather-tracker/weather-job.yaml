@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: weather-cronjob
+spec:
+  schedule: "0 * * * *"      # Every hour on the hour
+  concurrencyPolicy: Forbid   # Don't overlap runs
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: weather-tracker
+              image: ghcr.io/yuthimreddy/ds5220-weather:latest
+              imagePullPolicy: Always
+              env:
+                - name: S3_BUCKET
+                  value: "weather-dp2"    
+                - name: AWS_REGION
+                  value: "us-east-1"
