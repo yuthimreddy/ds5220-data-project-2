@@ -88,8 +88,9 @@ def save_csv(items):
     df.to_csv(csv_path, index=False)
     s3.upload_file(
         csv_path, S3_BUCKET, "data.csv",
-        ExtraArgs={"ContentType": "text/csv", "ACL": "public-read"},
+        ExtraArgs={"ContentType": "text/csv"},
     )
+
     print(f"Uploaded data.csv ({len(df)} rows)")
     return df
 
@@ -140,8 +141,9 @@ def make_plot(df):
 
     s3.upload_file(
         plot_path, S3_BUCKET, "plot.png",
-        ExtraArgs={"ContentType": "image/png", "ACL": "public-read"},
+        ExtraArgs={"ContentType": "image/png"},
     )
+    
     print(f"Uploaded plot.png")
 
 
